@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shiv Assistant</title>
+  <link rel="stylesheet" href="/ui/style.css" />
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <div class="brand">
+        <span id="connDot" class="dot off" title="Backend connection"></span>
+        <span id="assistantName">Shiv</span>
+      </div>
+      <div class="controls">
+        <select id="providerSelect" title="Brain">
+          <option value="claude">Claude</option>
+          <option value="ollama">Ollama (local)</option>
+        </select>
+        <select id="avatarSelect" title="Avatar">
+          <option value="auto">Live avatar</option>
+          <option value="local">Local orb</option>
+        </select>
+        <button id="clearBtn" class="icon-btn" title="Clear conversation" aria-label="Clear conversation">
+          <svg viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <section class="stage" id="stage">
+      <canvas id="orb"></canvas>
+      <video id="avatarVideo" autoplay playsinline></video>
+      <audio id="avatarAudio" autoplay></audio>
+      <div class="stage-overlay">
+        <span id="statePill" class="pill">Starting…</span>
+        <span id="hud" class="hud"></span>
+      </div>
+      <button id="avatarToggle" class="stage-btn" hidden>Connect avatar</button>
+      <button id="soundBtn" class="stage-btn sound" hidden>🔊 Click to enable avatar sound</button>
+    </section>
+
+    <main id="chat" class="chat" aria-live="polite"></main>
+
+    <div id="confirmCard" class="confirm" hidden>
+      <div class="confirm-title">Allow this action?</div>
+      <pre id="confirmText"></pre>
+      <div class="confirm-actions">
+        <button id="denyBtn" class="btn ghost">Deny</button>
+        <button id="alwaysBtn" class="btn ghost" title="Allow this tool without asking until restart">Always (session)</button>
+        <button id="approveBtn" class="btn primary">Allow</button>
+      </div>
+    </div>
+
+    <footer class="composer">
+      <div class="listen-modes" role="radiogroup" aria-label="Listening mode">
+        <button data-mode="off">Mic off</button>
+        <button data-mode="ptt">Push to talk</button>
+        <button data-mode="wake">Wake word</button>
+      </div>
+      <div class="input-row">
+        <button id="micBtn" class="mic" title="Hold to talk (or Ctrl+Alt+Space anywhere)" aria-label="Hold to talk">
+          <svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+        </button>
+        <textarea id="input" rows="1" placeholder="Ask or tell Shiv to do something…"></textarea>
+        <button id="sendBtn" class="send" title="Send" aria-label="Send">
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <button id="stopBtn" class="send stop" title="Stop" aria-label="Stop" hidden>
+          <svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>
+        </button>
+      </div>
+    </footer>
+  </div>
+  <script type="module" src="/ui/app.js"></script>
+</body>
+</html>

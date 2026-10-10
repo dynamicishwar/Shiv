@@ -1,0 +1,15 @@
+.env
+.env.*
+!.env.example
+__pycache__/
+.pytest_cache/
+*.pyc
+*.pyo
+*.pyd
+shiv/
+shiv_env/
+avatar_env/
+logs/
+checkpoints/
+.edge_profile/
+*.log
